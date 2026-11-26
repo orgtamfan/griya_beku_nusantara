@@ -1,27 +1,60 @@
-﻿# PT Griya Beku Nusantara
+<div align="center">
+  <img src="public/images/logo.png" alt="Logo rumah PT Griya Beku Nusantara" width="180">
+  <h1>PT Griya Beku Nusantara</h1>
+  <p><strong>Frozen food rumahan, rasa khas Nusantara.</strong></p>
+  <p>Website company profile dan katalog digital berbasis Laravel</p>
+</div>
 
-Website company profile dan katalog digital frozen food berbasis Laravel. Pengunjung dapat melihat profil, katalog, detail produk, serta menghubungi admin melalui WhatsApp. Pengelolaan produk dilakukan melalui panel admin yang dilindungi login.
+---
+
+## Tentang Proyek
+
+Website untuk mengenalkan PT Griya Beku Nusantara dan menampilkan katalog frozen food secara dinamis. Pengunjung dapat melihat informasi produk dan menghubungi admin melalui WhatsApp. Admin dapat mengelola produk melalui panel yang dilindungi login.
 
 ## Fitur
 
-- Beranda dengan profil usaha, komitmen higienitas dan blast freezing, area layanan, serta produk unggulan.
-- Katalog produk dinamis dengan filter kategori dan halaman detail.
-- Login dan logout admin; semua halaman CRUD produk memerlukan autentikasi.
-- CRUD produk dan kategori terkait, termasuk unggah foto, validasi server-side, dan penghapusan foto saat produk dihapus atau fotonya diganti.
-- Seeder kategori, produk contoh, dan akun admin.
-- Tampilan responsif menggunakan Blade dan Tailwind CSS.
+| Area | Fitur |
+| --- | --- |
+| **Beranda** | Profil usaha, komitmen higienitas, proses blast freezing, area layanan, dan produk unggulan |
+| **Katalog** | Daftar produk dari database, filter kategori, harga, berat, dan detail produk |
+| **Pemesanan** | Tautan WhatsApp pada halaman detail produk |
+| **Panel admin** | Login, logout, serta CRUD produk |
+| **Foto produk** | Unggah dan validasi gambar; file lama dibersihkan saat foto diganti atau produk dihapus |
+| **Data awal** | Seeder untuk kategori, enam produk contoh, dan akun admin |
+| **Tampilan** | Blade dan Tailwind CSS dengan layout responsif |
 
-## Menjalankan aplikasi
+## Teknologi
 
-Persyaratan: PHP sesuai `composer.json`, Composer, serta MySQL/MariaDB atau SQLite.
+- PHP dan Laravel (versi mengikuti `composer.json`)
+- Blade dan Tailwind CSS
+- MySQL/MariaDB atau SQLite
+- Eloquent ORM dengan relasi kategori dan produk
+- Laravel Storage untuk gambar produk
+
+## Menjalankan Aplikasi
+
+### Persyaratan
+
+PHP sesuai `composer.json`, Composer, dan MySQL/MariaDB atau SQLite.
+
+### Instalasi
+
+Dari terminal di folder proyek:
 
 ```bash
 composer install
+```
+
+Jika belum memiliki `.env`, salin dari berkas contoh, lalu buat application key:
+
+```bash
 cp .env.example .env
 php artisan key:generate
 ```
 
-Atur koneksi database pada `.env`, lalu jalankan:
+Di Windows PowerShell, gunakan `Copy-Item .env.example .env` sebagai pengganti perintah `cp`.
+
+Atur koneksi database di `.env`, kemudian siapkan database dan jalankan aplikasi:
 
 ```bash
 php artisan migrate:fresh --seed
@@ -29,24 +62,24 @@ php artisan storage:link
 php artisan serve
 ```
 
-Buka `http://127.0.0.1:8000`. Perintah `migrate:fresh` menghapus seluruh tabel dan data yang sudah ada sebelum migrasi ulang.
+Buka `http://127.0.0.1:8000` di browser. **Perhatian:** `migrate:fresh` menghapus tabel dan data lama sebelum membuat ulang database.
 
-## Login admin
+## Login Admin
 
-Halaman login tersedia di `/admin/login`. Rute `/admin/products` dan seluruh rute CRUD di bawahnya akan mengarahkan pengunjung yang belum login ke halaman login.
+Buka `http://127.0.0.1:8000/admin/login`.
 
-Akun awal setelah menjalankan seeder:
+Akun awal yang dibuat oleh seeder:
 
 ```text
-Email    : admin@griyabekunusantara.test
-Password : password
+Email       admin@griyabekunusantara.test
+Kata sandi  password
 ```
 
-Kata sandi tersebut hanya untuk penggunaan lokal. Ganti kredensial awal sebelum aplikasi dipakai atau dipublikasikan. Akun ini dibuat oleh `DatabaseSeeder`; menjalankan seeder ulang akan menetapkan kata sandi awal kembali untuk email tersebut.
+Kredensial ini untuk penggunaan lokal. Ganti sebelum aplikasi dipublikasikan. Menjalankan seeder kembali akan mengatur ulang kata sandi akun tersebut.
 
-## Database
+## Database dan Penyimpanan Gambar
 
-Contoh konfigurasi MySQL/MariaDB pada `.env`:
+Tabel `products` berelasi ke `categories` melalui `category_id`. Contoh konfigurasi MySQL/MariaDB:
 
 ```env
 DB_CONNECTION=mysql
@@ -57,20 +90,33 @@ DB_USERNAME=root
 DB_PASSWORD=
 ```
 
-Buat database terlebih dahulu. SQLite juga dapat digunakan dengan mengatur `DB_CONNECTION=sqlite` dan membuat berkas `database/database.sqlite` sebelum migrasi.
+Buat database `griya_beku_nusantara` terlebih dahulu. Untuk SQLite, atur `DB_CONNECTION=sqlite` dan siapkan `database/database.sqlite` sebelum menjalankan migrasi.
 
-Tabel `products` memiliki relasi many-to-one ke `categories`. Foto produk disimpan pada disk `public` di `storage/app/public/products`, dan dapat diakses setelah membuat symlink dengan `php artisan storage:link`.
+Foto produk disimpan pada `storage/app/public/products`. Jalankan `php artisan storage:link` agar file dapat ditampilkan oleh aplikasi.
 
-## Rute utama
+## Rute Utama
 
 | Method | URL | Keterangan |
-| :--- | :--- | :--- |
-| GET | `/` | Beranda publik |
-| GET | `/produk` | Katalog dan filter kategori |
-| GET | `/produk/{product}` | Detail produk dan tautan WhatsApp |
-| GET | `/admin/login` | Form login admin |
-| POST | `/admin/login` | Proses login |
-| POST | `/admin/logout` | Logout admin |
-| GET/POST/PUT/DELETE | `/admin/products/...` | Panel CRUD produk (perlu login) |
+| --- | --- | --- |
+| `GET` | `/` | Beranda |
+| `GET` | `/produk` | Katalog dan filter kategori |
+| `GET` | `/produk/{product}` | Detail produk dan tautan WhatsApp |
+| `GET` | `/admin/login` | Form login admin |
+| `POST` | `/admin/login` | Proses login |
+| `POST` | `/admin/logout` | Logout |
+| `GET/POST/PUT/DELETE` | `/admin/products/...` | CRUD produk, perlu login |
 
-Nomor WhatsApp dapat diatur melalui `ADMIN_WHATSAPP_NUMBER` pada `.env`.
+Nomor WhatsApp admin dapat diatur melalui `ADMIN_WHATSAPP_NUMBER` pada `.env`.
+
+## Struktur Direktori
+
+```text
+app/Http/Controllers/       Controller halaman publik, login, dan admin
+app/Http/Requests/          Validasi form produk
+app/Models/                 Model Category, Product, dan User
+database/migrations/        Struktur tabel dan relasi
+database/seeders/           Kategori, produk, dan akun awal
+public/images/logo.png      Logo rumah Griya Beku Nusantara
+resources/views/            Halaman Blade
+routes/web.php              Rute aplikasi
+```

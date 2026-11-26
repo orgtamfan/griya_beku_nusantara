@@ -4,55 +4,55 @@
 
 @section('content')
 
-    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
 
-        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
+        <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 pb-6 mb-6 border-b border-ivory-200">
             <div>
-                <span class="inline-block bg-slate-800 text-white text-xs font-semibold px-2.5 py-1 rounded mb-2">ADMIN</span>
-                <h1 class="text-2xl sm:text-3xl font-extrabold text-brand-900">Manajemen Produk</h1>
+                <p class="text-xs font-semibold uppercase tracking-[0.12em] text-[#636B73]">Panel Admin</p>
+                <h1 class="font-serif text-2xl sm:text-3xl font-bold text-brand-900 mt-1">Manajemen Produk</h1>
             </div>
             <a href="{{ route('admin.products.create') }}"
-               class="inline-flex items-center justify-center gap-2 bg-brand-700 hover:bg-brand-800 text-white font-bold px-5 py-2.5 rounded-xl shadow transition">
+               class="inline-flex items-center justify-center gap-2 bg-brand-800 hover:bg-brand-900 text-white font-semibold text-sm px-4 py-2.5 rounded-lg transition">
                 + Tambah Produk
             </a>
         </div>
 
-        <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-x-auto">
+        <div class="bg-white rounded-lg border border-ivory-200 overflow-x-auto">
             <table class="w-full text-sm min-w-[720px]">
-                <thead class="bg-slate-50 text-slate-500 text-xs uppercase tracking-wide">
+                <thead class="bg-ivory-100/70 text-[#525B63] text-xs uppercase tracking-wider border-b border-ivory-200">
                     <tr>
-                        <th class="px-4 py-3 text-left">Foto</th>
-                        <th class="px-4 py-3 text-left">Nama Produk</th>
-                        <th class="px-4 py-3 text-left">Kategori</th>
-                        <th class="px-4 py-3 text-left">Harga</th>
-                        <th class="px-4 py-3 text-left">Stok</th>
-                        <th class="px-4 py-3 text-right">Aksi</th>
+                        <th class="px-4 py-3 text-left font-semibold">Foto</th>
+                        <th class="px-4 py-3 text-left font-semibold">Nama Produk</th>
+                        <th class="px-4 py-3 text-left font-semibold">Kategori</th>
+                        <th class="px-4 py-3 text-left font-semibold">Harga</th>
+                        <th class="px-4 py-3 text-left font-semibold">Stok</th>
+                        <th class="px-4 py-3 text-right font-semibold">Aksi</th>
                     </tr>
                 </thead>
-                <tbody class="divide-y divide-slate-100">
+                <tbody class="divide-y divide-ivory-100">
                     @forelse ($products as $product)
-                        <tr class="hover:bg-slate-50">
+                        <tr class="hover:bg-ivory-50/70">
                             <td class="px-4 py-3">
                                 <img src="{{ $product->image_url }}" alt="{{ $product->name }}"
-                                     class="h-12 w-12 object-cover rounded-lg border border-slate-200">
+                                     class="h-11 w-11 object-cover rounded border border-ivory-200">
                             </td>
-                            <td class="px-4 py-3 font-medium text-slate-700 max-w-[220px] truncate">{{ $product->name }}</td>
-                            <td class="px-4 py-3 text-slate-500">{{ $product->category->name }}</td>
-                            <td class="px-4 py-3 text-slate-700 font-semibold">{{ $product->formatted_price }}</td>
-                            <td class="px-4 py-3">
-                                <span class="px-2 py-0.5 rounded-full text-xs font-semibold {{ $product->in_stock ? 'bg-emerald-50 text-emerald-600' : 'bg-red-50 text-red-500' }}">
+                            <td class="px-4 py-3 font-medium text-[#1B1F23] max-w-[240px] truncate">{{ $product->name }}</td>
+                            <td class="px-4 py-3 text-[#525B63]">{{ $product->category->name }}</td>
+                            <td class="px-4 py-3 text-[#1B1F23] font-semibold tabular-nums">{{ $product->formatted_price }}</td>
+                            <td class="px-4 py-3 tabular-nums">
+                                <span class="px-2 py-0.5 rounded text-xs font-semibold {{ $product->in_stock ? 'bg-emerald-50 text-emerald-700' : 'bg-red-50 text-red-600' }}">
                                     {{ $product->stock }}
                                 </span>
                             </td>
                             <td class="px-4 py-3">
-                                <div class="flex items-center justify-end gap-2">
+                                <div class="flex items-center justify-end gap-3">
                                     <a href="{{ route('admin.products.edit', $product) }}"
-                                       class="text-xs font-semibold text-brand-700 hover:underline px-2 py-1">Edit</a>
+                                       class="text-xs font-semibold text-brand-800 hover:underline">Edit</a>
                                     <form action="{{ route('admin.products.destroy', $product) }}" method="POST"
                                           onsubmit="return confirm('Hapus produk &quot;{{ $product->name }}&quot;? Tindakan ini tidak dapat dibatalkan.');">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="text-xs font-semibold text-red-500 hover:underline px-2 py-1">
+                                        <button type="submit" class="text-xs font-semibold text-red-600 hover:underline">
                                             Hapus
                                         </button>
                                     </form>
@@ -61,7 +61,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="6" class="px-4 py-10 text-center text-slate-400">
+                            <td colspan="6" class="px-4 py-10 text-center text-[#636B73]">
                                 Belum ada produk. Klik "Tambah Produk" untuk menambahkan data pertama.
                             </td>
                         </tr>

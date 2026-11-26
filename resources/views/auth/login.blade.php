@@ -9,31 +9,37 @@
         tailwind.config = {
             theme: { extend: {
                 colors: {
-                    brand: { 50:'#eef6fc',100:'#d7eaf8',600:'#1e5a8f',700:'#17456e',800:'#0e344f',900:'#0a2439' },
-                    accent: { 400:'#54d2e6',500:'#28b9d2' },
+                    ivory: { 50:'#FAF8F5', 100:'#F3EFE8', 200:'#E2DDD4' },
+                    brand: { 50:'#EDF3F6', 100:'#D4E2EA', 600:'#1A5270', 700:'#144159', 800:'#0F3548', 900:'#0A2330' },
                 },
-                fontFamily: { sans: ['Poppins', 'ui-sans-serif', 'system-ui', 'sans-serif'] },
+                fontFamily: {
+                    sans: ['"Plus Jakarta Sans"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+                    serif: ['Fraunces', 'Georgia', 'serif'],
+                },
             } }
         }
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="icon" href="{{ asset('images/logo.png') }}" type="image/png">
-    <style>body { font-family: 'Poppins', ui-sans-serif, system-ui, sans-serif; }</style>
+    <style>body { font-family: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif; }</style>
 </head>
-<body class="bg-brand-900 min-h-screen flex items-center justify-center px-4 py-10">
+<body class="bg-ivory-50 text-[#1B1F23] min-h-screen flex items-center justify-center px-4 py-10">
     <div class="w-full max-w-sm">
-        <div class="text-center mb-6">
-            <span class="inline-flex h-20 w-20 items-center justify-center rounded-2xl bg-white p-2 shadow-lg mb-3">
-                <img src="{{ asset('images/logo.png') }}" alt="Logo rumah PT Griya Beku Nusantara" class="h-full w-full object-contain">
+        <div class="flex items-center gap-3 mb-6">
+            <span class="inline-flex h-12 w-12 items-center justify-center rounded-lg bg-white border border-ivory-200 p-1.5">
+                <img src="{{ asset('images/logo.png') }}" alt="Logo PT Griya Beku Nusantara" class="h-full w-full object-contain">
             </span>
-            <h1 class="text-white font-bold text-lg">PT Griya Beku Nusantara</h1>
-            <p class="text-brand-200 text-sm">Login Admin</p>
+            <div>
+                <h1 class="font-bold text-base text-brand-900">PT Griya Beku Nusantara</h1>
+                <p class="text-[#636B73] text-xs uppercase tracking-wider">Portal Admin</p>
+            </div>
         </div>
 
-        <div class="bg-white rounded-2xl shadow-xl p-6 sm:p-8">
+        <div class="bg-white border border-ivory-200 rounded-lg p-6 sm:p-7">
             @if ($errors->any())
-                <div class="bg-red-50 border border-red-200 text-red-600 text-sm rounded-lg px-4 py-3 mb-5" role="alert">
+                <div class="bg-red-50 border border-red-200 text-red-700 text-sm rounded-md px-3.5 py-2.5 mb-5" role="alert">
                     @foreach ($errors->all() as $error)
                         <p>{{ $error }}</p>
                     @endforeach
@@ -43,30 +49,30 @@
             <form action="{{ route('admin.login.store') }}" method="POST" class="space-y-4">
                 @csrf
                 <div>
-                    <label for="email" class="block text-sm font-semibold text-slate-700 mb-1">Email</label>
+                    <label for="email" class="block text-xs font-semibold uppercase tracking-wider text-[#525B63] mb-1.5">Email</label>
                     <input type="email" name="email" id="email" required autofocus value="{{ old('email') }}"
                            autocomplete="username"
-                           class="w-full rounded-lg border-slate-300 focus:border-brand-600 focus:ring-brand-600 text-sm"
+                           class="w-full rounded-md border border-ivory-200 px-3 py-2 text-sm focus:outline-none focus:border-brand-700 focus:ring-1 focus:ring-brand-700"
                            placeholder="admin@griyabekunusantara.test">
                 </div>
                 <div>
-                    <label for="password" class="block text-sm font-semibold text-slate-700 mb-1">Kata Sandi</label>
+                    <label for="password" class="block text-xs font-semibold uppercase tracking-wider text-[#525B63] mb-1.5">Kata Sandi</label>
                     <input type="password" name="password" id="password" required autocomplete="current-password"
-                           class="w-full rounded-lg border-slate-300 focus:border-brand-600 focus:ring-brand-600 text-sm"
+                           class="w-full rounded-md border border-ivory-200 px-3 py-2 text-sm focus:outline-none focus:border-brand-700 focus:ring-1 focus:ring-brand-700"
                            placeholder="Kata sandi">
                 </div>
-                <label class="flex items-center gap-2 text-sm text-slate-500">
-                    <input type="checkbox" name="remember" value="1" class="rounded border-slate-300 text-brand-600 focus:ring-brand-600">
+                <label class="flex items-center gap-2 text-sm text-[#525B63]">
+                    <input type="checkbox" name="remember" value="1" class="rounded border-ivory-200 text-brand-800 focus:ring-brand-700">
                     Ingat saya
                 </label>
-                <button type="submit" class="w-full bg-brand-700 hover:bg-brand-800 text-white font-bold py-2.5 rounded-xl shadow transition">
+                <button type="submit" class="w-full bg-brand-800 hover:bg-brand-900 text-white font-semibold text-sm py-2.5 rounded-lg transition">
                     Masuk
                 </button>
             </form>
         </div>
 
-        <p class="text-center text-brand-300 text-xs mt-6">
-            <a href="{{ route('home') }}" class="hover:text-white">&larr; Kembali ke website</a>
+        <p class="text-center text-[#636B73] text-xs mt-5">
+            <a href="{{ route('home') }}" class="hover:text-brand-800">&larr; Kembali ke beranda</a>
         </p>
     </div>
 </body>
