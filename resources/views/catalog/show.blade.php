@@ -7,11 +7,11 @@
     <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
 
         <nav class="text-xs sm:text-sm text-[#636B73] mb-6 flex items-center gap-2 flex-wrap">
-            <a href="{{ route('home') }}" class="hover:text-brand-800">Beranda</a>
+            <a href="{{ route('home') }}" class="hover:text-ice-700">Beranda</a>
             <span>/</span>
-            <a href="{{ route('catalog.index') }}" class="hover:text-brand-800">Katalog</a>
+            <a href="{{ route('catalog.index') }}" class="hover:text-ice-700">Katalog</a>
             <span>/</span>
-            <span class="text-[#1B1F23] font-medium truncate">{{ $product->name }}</span>
+            <span class="text-brand-900 font-medium truncate">{{ $product->name }}</span>
         </nav>
 
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
@@ -23,11 +23,11 @@
             </div>
 
             <div class="lg:col-span-6">
-                <p class="text-xs font-semibold uppercase tracking-[0.12em] text-[#636B73]">
+                <span class="inline-block bg-ice-50 border border-ice-200 text-ice-700 text-xs font-semibold uppercase tracking-[0.1em] px-2.5 py-1 rounded">
                     {{ $product->category->name }}
-                </p>
+                </span>
 
-                <h1 class="font-serif text-2xl sm:text-3xl font-bold text-brand-900 mt-1.5">{{ $product->name }}</h1>
+                <h1 class="font-serif text-2xl sm:text-3xl font-bold text-brand-900 mt-3">{{ $product->name }}</h1>
 
                 <p class="text-2xl sm:text-3xl font-bold text-terracotta-600 mt-3 pb-5 border-b border-ivory-200 tabular-nums">
                     {{ $product->formatted_price }}
@@ -35,11 +35,11 @@
 
                 <dl class="grid grid-cols-2 divide-x divide-ivory-200 border border-ivory-200 bg-white rounded-lg my-6 text-sm">
                     <div class="p-3.5">
-                        <dt class="text-[#636B73] text-xs uppercase tracking-wider">Berat Bersih</dt>
-                        <dd class="font-semibold text-[#1B1F23] mt-1 tabular-nums">{{ $product->weight_gram }} gram</dd>
+                        <dt class="text-ice-700 text-xs font-semibold uppercase tracking-wider">Berat Bersih</dt>
+                        <dd class="font-semibold text-brand-900 mt-1 tabular-nums">{{ $product->weight_gram }} gram</dd>
                     </div>
                     <div class="p-3.5">
-                        <dt class="text-[#636B73] text-xs uppercase tracking-wider">Ketersediaan</dt>
+                        <dt class="text-ice-700 text-xs font-semibold uppercase tracking-wider">Ketersediaan</dt>
                         <dd class="font-semibold mt-1 tabular-nums {{ $product->in_stock ? 'text-[#1F6E43]' : 'text-red-600' }}">
                             {{ $product->in_stock ? $product->stock.' pack tersedia' : 'Stok habis' }}
                         </dd>
@@ -47,7 +47,7 @@
                 </dl>
 
                 <div class="mb-8">
-                    <h2 class="font-semibold text-[#1B1F23] mb-2 text-xs uppercase tracking-wider">Deskripsi &amp; Komposisi</h2>
+                    <h2 class="font-semibold text-brand-900 mb-2 text-xs uppercase tracking-wider">Deskripsi &amp; Komposisi</h2>
                     <p class="text-[#525B63] leading-relaxed whitespace-pre-line text-sm sm:text-base">{{ $product->description }}</p>
                 </div>
 

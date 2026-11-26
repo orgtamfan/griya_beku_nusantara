@@ -8,7 +8,7 @@
 
         <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 pb-6 mb-6 border-b border-ivory-200">
             <div>
-                <p class="text-xs font-semibold uppercase tracking-[0.12em] text-[#636B73]">Panel Admin</p>
+                <p class="text-xs font-semibold uppercase tracking-[0.12em] text-terracotta-500">Panel Admin</p>
                 <h1 class="font-serif text-2xl sm:text-3xl font-bold text-brand-900 mt-1">Manajemen Produk</h1>
             </div>
             <a href="{{ route('admin.products.create') }}"
@@ -19,7 +19,7 @@
 
         <div class="bg-white rounded-lg border border-ivory-200 overflow-x-auto">
             <table class="w-full text-sm min-w-[720px]">
-                <thead class="bg-ivory-100/70 text-[#525B63] text-xs uppercase tracking-wider border-b border-ivory-200">
+                <thead class="bg-ice-50 text-brand-900 text-xs uppercase tracking-wider border-b border-ice-200">
                     <tr>
                         <th class="px-4 py-3 text-left font-semibold">Foto</th>
                         <th class="px-4 py-3 text-left font-semibold">Nama Produk</th>
@@ -36,23 +36,27 @@
                                 <img src="{{ $product->image_url }}" alt="{{ $product->name }}"
                                      class="h-11 w-11 object-cover rounded border border-ivory-200">
                             </td>
-                            <td class="px-4 py-3 font-medium text-[#1B1F23] max-w-[240px] truncate">{{ $product->name }}</td>
-                            <td class="px-4 py-3 text-[#525B63]">{{ $product->category->name }}</td>
-                            <td class="px-4 py-3 text-[#1B1F23] font-semibold tabular-nums">{{ $product->formatted_price }}</td>
+                            <td class="px-4 py-3 font-medium text-brand-900 max-w-[240px] truncate">{{ $product->name }}</td>
+                            <td class="px-4 py-3">
+                                <span class="inline-block bg-ice-50 text-ice-700 border border-ice-200 text-xs font-medium px-2 py-0.5 rounded">
+                                    {{ $product->category->name }}
+                                </span>
+                            </td>
+                            <td class="px-4 py-3 text-terracotta-600 font-semibold tabular-nums">{{ $product->formatted_price }}</td>
                             <td class="px-4 py-3 tabular-nums">
-                                <span class="px-2 py-0.5 rounded text-xs font-semibold {{ $product->in_stock ? 'bg-emerald-50 text-emerald-700' : 'bg-red-50 text-red-600' }}">
+                                <span class="px-2 py-0.5 rounded text-xs font-semibold {{ $product->in_stock ? 'bg-emerald-50 text-emerald-700' : 'bg-terracotta-50 text-terracotta-600' }}">
                                     {{ $product->stock }}
                                 </span>
                             </td>
                             <td class="px-4 py-3">
                                 <div class="flex items-center justify-end gap-3">
                                     <a href="{{ route('admin.products.edit', $product) }}"
-                                       class="text-xs font-semibold text-brand-800 hover:underline">Edit</a>
+                                       class="text-xs font-semibold text-ice-700 hover:underline">Edit</a>
                                     <form action="{{ route('admin.products.destroy', $product) }}" method="POST"
                                           onsubmit="return confirm('Hapus produk &quot;{{ $product->name }}&quot;? Tindakan ini tidak dapat dibatalkan.');">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="text-xs font-semibold text-red-600 hover:underline">
+                                        <button type="submit" class="text-xs font-semibold text-terracotta-600 hover:underline">
                                             Hapus
                                         </button>
                                     </form>

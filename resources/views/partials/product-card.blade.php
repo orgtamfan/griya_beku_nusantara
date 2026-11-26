@@ -1,6 +1,6 @@
 {{-- Expects: $product --}}
 <a href="{{ route('catalog.show', $product) }}"
-   class="group bg-white rounded-lg border border-ivory-200 overflow-hidden hover:border-brand-700/50 transition-colors flex flex-col">
+   class="group bg-white rounded-lg border border-ivory-200 overflow-hidden hover:border-ice-600 transition-colors flex flex-col">
     <div class="aspect-[4/3] bg-ivory-100 overflow-hidden relative">
         <img src="{{ $product->image_url }}" alt="{{ $product->name }}"
              class="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-300">
@@ -12,10 +12,10 @@
     </div>
     <div class="p-3.5 sm:p-4 flex-1 flex flex-col justify-between">
         <div>
-            <p class="text-[11px] font-medium uppercase tracking-wider text-[#636B73]">
+            <span class="inline-block bg-ice-50 text-ice-700 border border-ice-200 text-[10px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded">
                 {{ $product->category->name }}
-            </p>
-            <h3 class="font-semibold text-[#1B1F23] text-sm sm:text-[15px] leading-snug line-clamp-2 mt-1 group-hover:text-brand-800 transition-colors">
+            </span>
+            <h3 class="font-semibold text-brand-900 text-sm sm:text-[15px] leading-snug line-clamp-2 mt-2 group-hover:text-ice-700 transition-colors">
                 {{ $product->name }}
             </h3>
         </div>
